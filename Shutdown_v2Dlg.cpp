@@ -114,6 +114,10 @@ void CShutdownv2Dlg::OnBnClickedButtonMain()
 	str.Format(_T("cmd.exe /K shutdown /s /t %d"), time);
 	CStringToChar(str, &ptr);
 	//system(ptr);
+	WinExec("cmd.exe /K shutdown /a", SW_HIDE);
+	Sleep(100);
+	WinExec(ptr, SW_HIDE);
+	Sleep(100);
 	WinExec(ptr, SW_HIDE);
 
 	if (ptr != NULL)delete ptr;
@@ -129,11 +133,22 @@ void CShutdownv2Dlg::OnBnClickedButtonMain2()
 BOOL CShutdownv2Dlg::PreTranslateMessage(MSG* pMsg)
 {
 	// 에디트컨트롤에서 WM_KEYDOWN 발생됐는가? 체크
-	if (pMsg->message == WM_KEYDOWN && pMsg->hwnd == GetDlgItem(IDC_EDIT_MAIN)->m_hWnd) {
+	if (pMsg->message == WM_KEYDOWN && pMsg->hwnd == GetDlgItem(IDC_EDIT_MAIN)->m_hWnd) {// 최상단 초단위 설정 엔터
 		// 눌러진 키가 엔터키인가?
 		if (pMsg->wParam == VK_RETURN) {
 			// 엔터키 입력 후 하고자 하는 기능 코드 추가.
 			OnBnClickedButtonMain();
+			return TRUE;
+		}
+	}
+	if (pMsg->message == WM_KEYDOWN && 
+		((pMsg->hwnd == GetDlgItem(IDC_EDIT_F_HOUR)->m_hWnd || 
+		(pMsg->hwnd == GetDlgItem(IDC_EDIT_F_MIN)->m_hWnd) || 
+		(pMsg->hwnd == GetDlgItem(IDC_EDIT_F_SEC)->m_hWnd)))) {
+		// 눌러진 키가 엔터키인가?
+		if (pMsg->wParam == VK_RETURN) {
+			// 엔터키 입력 후 하고자 하는 기능 코드 추가.
+			OnBnClickedButtonMain3();
 			return TRUE;
 		}
 	}
@@ -158,6 +173,10 @@ void CShutdownv2Dlg::OnBnClickedButtonMain3()
 	str.Format(_T("cmd.exe /K shutdown /s /t %d"), time);
 	CStringToChar(str, &ptr);
 	//system(ptr);
+	WinExec("cmd.exe /K shutdown /a", SW_HIDE);
+	Sleep(100);
+	WinExec(ptr, SW_HIDE);
+	Sleep(100);
 	WinExec(ptr, SW_HIDE);
 
 	if (ptr != NULL)delete ptr;
