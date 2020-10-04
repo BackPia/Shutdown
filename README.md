@@ -4,7 +4,7 @@ Shutdown
 (v1.0)최상단 초단위 설정
 (v1.1)그 아래 시간, 분, 초단위 설정
 
-![Main](.image/Main.png)
+![Main](./image/Main.png)
 =======
 # Shutdown
 # 취소버튼 누를 시 종료 취소
