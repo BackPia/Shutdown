@@ -35,4 +35,9 @@ public:
 	CEdit m_Time;
 	afx_msg void OnBnClickedButtonMain2();
 	BOOL PreTranslateMessage(MSG* pMsg);
+	afx_msg void OnBnClickedButtonMain3();
+	afx_msg void OnEnChangeEditFHour();
+	CEdit mFhour;
+	CEdit mFmin;
+	CEdit mFsec;
 };

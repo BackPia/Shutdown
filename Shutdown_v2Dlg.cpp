@@ -27,6 +27,9 @@ void CShutdownv2Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT_MAIN, m_Time);
+	DDX_Control(pDX, IDC_EDIT_F_HOUR, mFhour);
+	DDX_Control(pDX, IDC_EDIT_F_MIN, mFmin);
+	DDX_Control(pDX, IDC_EDIT_F_SEC, mFsec);
 }
 
 BEGIN_MESSAGE_MAP(CShutdownv2Dlg, CDialogEx)
@@ -34,6 +37,7 @@ BEGIN_MESSAGE_MAP(CShutdownv2Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_MAIN, &CShutdownv2Dlg::OnBnClickedButtonMain)
 	ON_BN_CLICKED(IDC_BUTTON_MAIN2, &CShutdownv2Dlg::OnBnClickedButtonMain2)
+	ON_BN_CLICKED(IDC_BUTTON_MAIN3, &CShutdownv2Dlg::OnBnClickedButtonMain3)
 END_MESSAGE_MAP()
 
 
@@ -135,3 +139,28 @@ BOOL CShutdownv2Dlg::PreTranslateMessage(MSG* pMsg)
 	}
 	return CDialog::PreTranslateMessage(pMsg);
 }
+
+void CShutdownv2Dlg::OnBnClickedButtonMain3()
+{
+	int h,m,s,time;
+	CString temp, str;
+	char* ptr;
+
+	mFhour.GetWindowTextW(temp);
+	h = _ttoi(temp);
+	mFmin.GetWindowTextW(temp);
+	m = _ttoi(temp);
+	mFsec.GetWindowTextW(temp);
+	s = _ttoi(temp);
+
+	time = h * 3600 + m * 60 + s;
+
+	str.Format(_T("cmd.exe /K shutdown /s /t %d"), time);
+	CStringToChar(str, &ptr);
+	//system(ptr);
+	WinExec(ptr, SW_HIDE);
+
+	if (ptr != NULL)delete ptr;
+	OnOK();
+}
+
