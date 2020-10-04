@@ -1,0 +1,2 @@
+C:\Users\baek\source\repos\Shutdown_v2\Debug\Shutdown_v2.exe
+C:\Users\baek\source\repos\Shutdown_v2\Debug\Shutdown_v2.pdb
